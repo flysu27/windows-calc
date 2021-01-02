@@ -1,0 +1,101 @@
+body {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #BEBEBE;
+}
+html {
+  background-color: white;
+}
+@media screen and (max-width: 400px) {
+  body {
+    width: 100%;
+  }
+}
+button {
+  border: 0;
+}
+.title {
+  height: 5.2173913%;
+  padding: 0% 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+.title .screenFunc {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}
+.func {
+  height: 7.24637681%;
+  padding: 0% 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.func .lFunc {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 40%;
+}
+.func .lFunc .funcBtn {
+  height: 22px;
+  width: 27px;
+  background: url(calcSelect.PNG);
+  margin-right: 10%;
+}
+.func .lFunc .funcName {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.func .history {
+  background: url(history.PNG);
+  height: 34px;
+  width: 34px;
+}
+.show {
+  height: 18.84057971%;
+  padding: 0% 2%;
+  text-align: right;
+}
+.show .showFormula {
+  height: 30%;
+}
+.show .showResult {
+  height: 70%;
+  font-size: 3em;
+  font-weight: bold;
+}
+.btn {
+  height: 65.2173913%;
+  padding: 1% 1%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.btn button {
+  background-color: #D8D8D8;
+  height: 16.6%;
+  border: 0.5px solid #BEBEBE;
+  width: 24.8%;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.btn button :hover {
+  background-color: #6b6b6b;
+}
+.btn .num {
+  background-color: white;
+}
+.btn .equ {
+  background-color: #8CB2D8;
+}
+footer {
+  height: 2.89855072%;
+  font-size: 12px;
+  text-align: center;
+}

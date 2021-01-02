@@ -1,0 +1,108 @@
+body{
+    max-width: 400px;
+    height: 100vh;
+    margin: 0 auto;
+    background-color:#BEBEBE;
+}
+html{
+    background-color: white;
+}
+@media screen and (max-width:400px){
+    body{
+        width: 100%;;
+    }
+}
+button{
+    border: 0;
+}
+.title{
+    height: 36%/690*100;
+    padding: 0% 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .screenFunc{
+        display: flex;
+        justify-content: space-between;
+        width: 30%;
+    }
+    font-weight: bold;
+}
+//功能区
+.func{
+    height: 50%/690*100;
+    padding: 0% 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .lFunc{
+        display: flex;
+        align-items: center;
+        height: 100%;
+        width: 40%;
+        .funcBtn{
+            height: 22px;
+            width: 27px;
+            background: url(./calcSelect.PNG);
+            margin-right: 10%;
+            
+        }
+        .funcName{
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+    }
+    .history{
+        background: url(./history.PNG);
+        height: 34px;
+        width: 34px;
+    }
+}
+//结果区
+.show{
+    height: 130%/690*100;
+    padding: 0% 2%;
+    text-align: right;
+    .showFormula{
+        height: 30%;
+    }
+    .showResult{
+        height: 70%;
+        
+        font-size: 3em;
+        font-weight: bold;
+    }
+}
+//按键区
+.btn{
+    height: 450%/690*100;
+    padding: 1% 1%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    button{
+        background-color: #D8D8D8;
+        height: 16.6%;
+        border: 0.5px solid #BEBEBE;
+        width: 24.8%;
+        font-size: 1.5em;
+        font-weight: bold;   
+        :hover{
+            background-color: #6b6b6b;
+        } 
+    }   
+    .num{
+        background-color: white;
+    }
+    .equ{
+        background-color: #8CB2D8;
+    }
+    }
+    
+    
+footer{
+    height: 20%/690*100;
+    font-size: 12px;
+    text-align: center;
+}
