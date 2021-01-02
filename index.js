@@ -24,6 +24,15 @@ btn.addEventListener("mouseup",function (e) {
     var curEle = e.target;
     curEle.setAttribute("class",oldClass);
 });
+btn.addEventListener("touchdown",function (e) {
+    var curEle = e.target;
+    oldClass = curEle.getAttribute("class");
+    curEle.setAttribute("class",oldClass+" btn-click");
+});
+btn.addEventListener("touchup",function (e) {
+    var curEle = e.target;
+    curEle.setAttribute("class",oldClass);
+});
 btn.addEventListener("click",hander);
 //点击处理函数
 function hander(e){
