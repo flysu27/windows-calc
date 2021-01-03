@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1985009",
+      "name": "垃圾桶",
+      "font_class": "lajitong",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "3050494",
+      "name": "选项",
+      "font_class": "option",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "12978121",
+      "name": "历史记录",
+      "font_class": "lishijilu",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    }
+  ]
+}

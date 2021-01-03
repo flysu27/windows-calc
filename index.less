@@ -3,10 +3,29 @@ body{
     height: 100vh;
     margin: 0 auto;
     background-color:#BEBEBE;
+    overflow: hidden;
+    position: relative;
 }
 html{
     background-color: white;
 }
+@font-face {
+    font-family: 'iconfont';
+    src: url('./font-icon/iconfont.eot');
+    src: url('./font-icon/iconfont.eot?#iefix') format('embedded-opentype'),
+        url('./font-icon/iconfont.woff2') format('woff2'),
+        url('./font-icon/iconfont.woff') format('woff'),
+        url('./font-icon/iconfont.ttf') format('truetype'),
+        url('./font-icon/iconfont.svg#iconfont') format('svg');
+  }
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 2em;
+  }
 @media screen and (max-width:400px){
     body{
         width: 100%;;
@@ -28,6 +47,43 @@ button{
     }
     font-weight: bold;
 }
+//遮罩层
+.mask{
+    position: absolute;
+    background-color: #727171;
+    opacity: 0.5;
+    height: 100vh;
+    width: 100%;
+    display: none;
+    .historyBox{
+            width: 100%;
+            height: 470%/690*100;
+            background-color: white;
+            position: absolute;
+            opacity: 1!important;
+            bottom: -540px;
+            box-sizing: border-box;
+            padding: 2% 0;
+        .historyList{
+            bottom: 0;
+            height: 94%;
+            overflow-y: scroll;
+            .show{
+                padding: 0;
+                
+            }
+            .show:hover{
+                background-color: #727171;
+            }
+        }
+        .clearBox{
+            position: absolute;
+            right: 1%;
+            bottom: 1%;
+            font-size: 2em;
+        }
+    }
+}
 //功能区
 .func{
     height: 50%/690*100;
@@ -41,9 +97,6 @@ button{
         height: 100%;
         width: 40%;
         .funcBtn{
-            height: 22px;
-            width: 27px;
-            background: url(./calcSelect.PNG);
             margin-right: 10%;
             
         }
@@ -51,11 +104,6 @@ button{
             font-weight: bold;
             font-size: 1.5em;
         }
-    }
-    .history{
-        background: url(./history.PNG);
-        height: 34px;
-        width: 34px;
     }
 }
 //结果区
@@ -100,7 +148,9 @@ button{
     }
     }
     
-    
+.btn-click{
+    background-color: #BEBEBE!important;
+}    
 footer{
     height: 20%/690*100;
     font-size: 12px;

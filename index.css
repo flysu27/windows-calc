@@ -3,9 +3,24 @@ body {
   height: 100vh;
   margin: 0 auto;
   background-color: #BEBEBE;
+  overflow: hidden;
+  position: relative;
 }
 html {
   background-color: white;
+}
+@font-face {
+  font-family: 'iconfont';
+  src: url('font-icon/iconfont.eot');
+  src: url('font-icon/iconfont.eot?#iefix') format('embedded-opentype'), url('font-icon/iconfont.woff2') format('woff2'), url('font-icon/iconfont.woff') format('woff'), url('font-icon/iconfont.ttf') format('truetype'), url('font-icon/iconfont.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 2em;
 }
 @media screen and (max-width: 400px) {
   body {
@@ -28,6 +43,41 @@ button {
   justify-content: space-between;
   width: 30%;
 }
+.mask {
+  position: absolute;
+  background-color: #727171;
+  opacity: 0.5;
+  height: 100vh;
+  width: 100%;
+  display: none;
+}
+.mask .historyBox {
+  width: 100%;
+  height: 68.11594203%;
+  background-color: white;
+  position: absolute;
+  opacity: 1!important;
+  bottom: -540px;
+  box-sizing: border-box;
+  padding: 2% 0;
+}
+.mask .historyBox .historyList {
+  bottom: 0;
+  height: 94%;
+  overflow-y: scroll;
+}
+.mask .historyBox .historyList .show {
+  padding: 0;
+}
+.mask .historyBox .historyList .show:hover {
+  background-color: #727171;
+}
+.mask .historyBox .clearBox {
+  position: absolute;
+  right: 1%;
+  bottom: 1%;
+  font-size: 2em;
+}
 .func {
   height: 7.24637681%;
   padding: 0% 2%;
@@ -42,19 +92,11 @@ button {
   width: 40%;
 }
 .func .lFunc .funcBtn {
-  height: 22px;
-  width: 27px;
-  background: url(calcSelect.PNG);
   margin-right: 10%;
 }
 .func .lFunc .funcName {
   font-weight: bold;
   font-size: 1.5em;
-}
-.func .history {
-  background: url(history.PNG);
-  height: 34px;
-  width: 34px;
 }
 .show {
   height: 18.84057971%;
@@ -93,6 +135,9 @@ button {
 }
 .btn .equ {
   background-color: #8CB2D8;
+}
+.btn-click {
+  background-color: #BEBEBE !important;
 }
 footer {
   height: 2.89855072%;
