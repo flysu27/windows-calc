@@ -1,3 +1,6 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//历史记录 含算术式与结果
+var historyArr = [];
 //运算符优先级
 var symPrior = { "(": 0, ")": 0, "%": 1, "/": 1, "*": 1, "+": 2, "-": 2 };
 //显示公式
@@ -17,19 +20,93 @@ var btn = document.getElementsByClassName("btn")[0];
 var sym = document.getElementsByClassName("sym");
 var oldClass = "";
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//遮罩层
 var mask = document.getElementsByClassName('mask')[0];
-mask.addEventListener("click",function (e){
-    this.style.display="none";
-})
 //历史记录按钮逻辑
 var history = [];
 var hisBtn = document.getElementsByClassName("history")[0];
 var historyBox = document.getElementsByClassName("historyBox")[0];
+var historyList = document.getElementsByClassName("historyList")[0];
+var historyBox_old_top = 0;
+var body = document.body;
+var bHeight = body.getBoundingClientRect().height;
+var bWidth = body.getBoundingClientRect().width;
 hisBtn.addEventListener("click",function (e){
     mask.style.display="block";
     //historyBox动画从下到上
-    animation(historyBox,false,false,true,true,2,540);
+    historyBox_old_top = historyBox.getBoundingClientRect().top;
+    getHistoryList();
+    itemEvent();
+    move(historyBox,450/690*bHeight,0.5,"top");
+    
+})
+//渲染history列表
+function getHistoryList(){
+  historyList.innerHTML = "";
+  for(var i=0; i<historyArr.length; i++){
+    var tmp = historyArr[i];
+    historyList.innerHTML+=`
+    <div class="show" data-id='`+i+`'">
+       <div class="showFormula">`+tmp[0]+`</div>
+       <div class="showResult">`+tmp[1]+`</div>
+    </div>
+    `;
+  }
+}
+//历史清理
+var clearBox = document.getElementsByClassName("clearBox")[0];
+clearBox.addEventListener("click",function (e){
+  historyArr = [];
+  historyList.innerHTML = "";
+  e.stopPropagation();//禁止冒泡
+})
+//计算器菜单
+var funcBtn = document.getElementsByClassName("funcBtn")[0];
+var funcBtn_old_left = 0;
+var cates = document.getElementsByClassName("cates")[0];
+funcBtn.addEventListener("click",function (e){
+  mask.style.display="block";
+  //cates动画从左到右
+  if(parseInt(cates.style.left)>=0){
+    move(cates,0.75*bWidth,0.5,"left");//收回
+    setTimeout(()=>{
+      mask.style.display="none";
+    },500);
+  }else{
+    move(cates,0.75*bWidth,0.5,"right");
+  }
+})
+function itemEvent(){
+  //历史公式项
+  var historyItem = historyList.getElementsByClassName("show");
+  for(var i=0; i<historyItem.length; i++){
+    historyItem[i].addEventListener("click",function (e){
+      //formula = formula.slice(0, formula.length - 1);
+      //公式\结果显示
+      f.innerText = this.children[0].innerText;
+      r.innerText = this.children[1].innerText;
+      //更新历史列表
+      var curId = parseInt(this.getAttribute("data-id"));
+      console.log(curId);
+      var tmp = historyArr[0];
+      historyArr[0] = historyArr[curId];
+      historyArr[curId] = tmp;
+      console.log(historyArr);
+    })
+  }
+}
+//遮罩层
+mask.addEventListener("click",function (e){
+    
+    if(parseInt(historyBox.style.top)<historyBox_old_top){
+      historyBox.style.top=historyBox_old_top+"px";
+    }
+    if(parseInt(cates.style.left)>=0){
+      move(cates,0.75*bWidth,0.5,"left");//收回
+    }
+    setTimeout(()=>{
+      this.style.display="none";
+    },500);
+    
 })
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //所有按键点击事件
@@ -216,7 +293,9 @@ function computed(formula) {
       stack.push(res);
     }
   }
-  r.innerText = stack[0];
+  var result = stack[0];
+  r.innerText = result
+  historyArr.push([formula+"=",result]);
 }
 function lastMustNum(formula) {
   while (
@@ -291,20 +370,74 @@ function midToBack(arr) {
   return back;
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//弹出动画函数
-function animation(obj,left,right,top,bottom,time,distance){
+// 移动函数 move
+// obj 移动对象,distance移动距离,time移动总耗时,direction移动方向[当前位置向 left\right\top\bottom],moving[liner\])
+function move (obj,distance,time,direction){
 
-    
-    if(bottom && top){
-        time = time==0?1:Math.floor(time);
-        var step = distance/time;
-        while(time){
-            console.log("test");
-            setTimeout(function() {
-                console.log(obj.style.bottom);
-                obj.style.bottom += step;
-            },1000);
-            time--;
-        }
-    }
+  var body = document.body;//用于居中的情况 不是所有的body都是默认占满全屏 那么下面赋值top一定会偏移需要减去body的偏移
+  var bodyLeft = body.getBoundingClientRect().left;
+  distance = Math.abs(distance);
+  time = Math.abs(time);
+  time = time==0?1:time;//time是0就运动1s
+  
+  //获取当前元素的left top
+  var posArr = obj.getBoundingClientRect();
+  obj.style.top = posArr.top+"px";
+  obj.style.left = posArr.left-bodyLeft+"px";
+
+  //将时间分为100份
+  var aveSpeed = distance/time/100;
+  var curTop = parseInt(obj.style.top);
+  var curLeft = parseInt(obj.style.left);
+  var old_Distance = distance;
+  var oldCurTop = curTop;//最初元素top
+  var oldCurLeft = curLeft;//最初元素left
+
+  //对不同移动方向设置定时器
+  if(direction=="right"){
+    var timer = setInterval(function () {
+      if(distance<=0){
+        obj.style.left = (oldCurLeft+old_Distance+"px");
+        clearInterval(timer);
+      }else{
+        curLeft = parseInt(obj.style.left);
+        obj.style.left = (curLeft+aveSpeed+"px");
+        distance-=aveSpeed;
+      }
+    },10);
+  }else if(direction=="top"){//向上
+    var timer = setInterval(function () {
+     
+      if(distance<=0){
+        obj.style.top = (oldCurTop-old_Distance+"px");
+        clearInterval(timer);
+      }else{
+        curTop = parseInt(obj.style.top);
+        obj.style.top = (curTop-aveSpeed+"px");
+        distance-=aveSpeed;
+      }
+    },10);
+  }else if(direction=="bottom"){//向下
+    var timer = setInterval(function () {
+      if(distance<=0){
+        obj.style.top = (oldCurTop+old_Distance+"px");
+        clearInterval(timer);
+      }else{
+        curTop = parseInt(obj.style.top);
+        obj.style.top = (curTop+aveSpeed+"px");
+        distance-=aveSpeed;
+      }
+    },10);
+  }else{//默认向左
+    var timer = setInterval(function () {
+      if(distance<=0){
+        obj.style.left = (oldCurLeft-old_Distance+"px");
+        clearInterval(timer);
+      }else{
+        curLeft = parseInt(obj.style.left);
+        obj.style.left = (curLeft-aveSpeed+"px");
+        distance-=aveSpeed;
+      }
+    },10);
+  }
 }

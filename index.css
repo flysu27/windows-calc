@@ -46,7 +46,7 @@ button {
 .mask {
   position: absolute;
   background-color: #727171;
-  opacity: 0.5;
+  opacity: 0.8;
   height: 100vh;
   width: 100%;
   display: none;
@@ -57,7 +57,7 @@ button {
   background-color: white;
   position: absolute;
   opacity: 1!important;
-  bottom: -540px;
+  bottom: -65.2173913%;
   box-sizing: border-box;
   padding: 2% 0;
 }
@@ -69,7 +69,7 @@ button {
 .mask .historyBox .historyList .show {
   padding: 0;
 }
-.mask .historyBox .historyList .show:hover {
+.mask .historyBox .historyList .actived {
   background-color: #727171;
 }
 .mask .historyBox .clearBox {
@@ -77,6 +77,34 @@ button {
   right: 1%;
   bottom: 1%;
   font-size: 2em;
+}
+.mask .historyBox .cates {
+  text-align: left;
+}
+.mask .cates {
+  box-sizing: border-box;
+  padding-top: 20%;
+  padding-left: 10%;
+  overflow-y: scroll;
+  font-size: 1em;
+  height: 94.7826087%;
+  position: absolute;
+  bottom: 0;
+  width: 75%;
+  left: -75%;
+  background-color: white;
+}
+.mask .cates .show {
+  height: 5%;
+  font-size: 1em;
+  text-align: left;
+}
+.mask .cates .show p {
+  margin: 0;
+  padding: 0;
+}
+.mask .cates .show:hover {
+  background-color: #6b6b6b;
 }
 .func {
   height: 7.24637681%;
@@ -93,6 +121,7 @@ button {
 }
 .func .lFunc .funcBtn {
   margin-right: 10%;
+  z-index: 999;
 }
 .func .lFunc .funcName {
   font-weight: bold;
@@ -105,9 +134,11 @@ button {
 }
 .show .showFormula {
   height: 30%;
+  overflow-x: scroll;
 }
 .show .showResult {
   height: 70%;
+  overflow-x: scroll;
   font-size: 3em;
   font-weight: bold;
 }
